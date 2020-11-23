@@ -24,6 +24,6 @@ namespace Summer_School_Movies.Models
 
         public string topActor3 { get; set; }
 
-        
+        // public List<Actor> topActors { get; set; }
     }
 }
