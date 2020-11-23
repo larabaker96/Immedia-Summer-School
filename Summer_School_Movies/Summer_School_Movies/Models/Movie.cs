@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Summer_School_Movies.Models
@@ -18,12 +19,6 @@ namespace Summer_School_Movies.Models
 
         public string ageRestriction { get; set; }
 
-        public string topActor1 { get; set; }
-
-        public string topActor2 { get; set; }
-
-        public string topActor3 { get; set; }
-
-        // public List<Actor> topActors { get; set; }
+        public List<Actor> topActors { get; set; }
     }
 }
