@@ -5,23 +5,23 @@ namespace Summer_School_Movies.Models
 {
     public class Movie
     {
-        public int movieId;
+        public int movieId { get; set; }
 
-        public string movieName;
+        public string movieName { get; set; }
 
-        public string description;
+        public string description { get; set; }
 
         [DataType(DataType.Date)]
-        public string releaseDate;
+        public string releaseDate { get; set; }
 
-        public string ageRestriction;
+        public string ageRestriction { get; set; }
 
-        public Actor topActor1;
+        public Actor topActor1 { get; set; }
 
-        public Actor topActor2;
+        public Actor topActor2 { get; set; }
 
-        public Actor topActor3;
+        public Actor topActor3 { get; set; }
 
-        public Genre movieGenre;
+        public Genre movieGenre { get; set; }
     }
 }
