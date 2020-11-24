@@ -19,6 +19,7 @@ namespace Summer_School_Movies.Models
 
         public string ageRestriction { get; set; }
 
+
         public List<Actor> topActors { get; set; }
     }
 }
