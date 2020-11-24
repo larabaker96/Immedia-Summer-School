@@ -31,7 +31,7 @@ namespace Summer_School_Movies.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Movie>> GetMovieById(int id)
         {
-            var movie = await _context.Movies.FindAsync(id);
+            var movie = await _context.Movies.Include(o => o.topActors).FirstOrDefaultAsync();
 
             if (movie == null)
             {
@@ -52,8 +52,8 @@ namespace Summer_School_Movies.Controllers
                 return BadRequest();
             }
 
-            _context.Attach(movie.topActors);
             _context.Entry(movie).State = EntityState.Modified;
+            _context.Update(movie);
 
             try
             {

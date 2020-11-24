@@ -20,7 +20,6 @@ namespace Summer_School_Movies.Models
 
         public string ageRestriction { get; set; }
 
-        [ForeignKey("actorId")]
-        public ICollection<Actor> topActors { get; set; }
+        public List<Actor> topActors { get; set; }
     }
 }
