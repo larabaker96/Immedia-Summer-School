@@ -24,12 +24,12 @@ namespace Summer_School_Movies.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Movie>>> GetMovies()
         {
-            return await _context.Movies.ToListAsync();
+            return await _context.Movies.Include(m => m.topActors).ToListAsync();
         }
 
         // GET: api/Movies/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Movie>> GetMovie(int id)
+        public async Task<ActionResult<Movie>> GetMovieById(int id)
         {
             var movie = await _context.Movies.FindAsync(id);
 
@@ -52,6 +52,7 @@ namespace Summer_School_Movies.Controllers
                 return BadRequest();
             }
 
+            _context.Attach(movie.topActors);
             _context.Entry(movie).State = EntityState.Modified;
 
             try
@@ -83,7 +84,7 @@ namespace Summer_School_Movies.Controllers
             await _context.SaveChangesAsync();
 
             //return CreatedAtAction("GetMovie", new { id = movie.movieId }, movie);
-            return CreatedAtAction(nameof(GetMovie), new { id = movie.movieId }, movie);
+            return CreatedAtAction(nameof(GetMovieById), new { id = movie.movieId }, movie);
         }
 
         // DELETE: api/Movies/5
