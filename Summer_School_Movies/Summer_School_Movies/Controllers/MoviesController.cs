@@ -82,7 +82,8 @@ namespace Summer_School_Movies.Controllers
             _context.Movies.Add(movie);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetMovie", new { id = movie.movieId }, movie);
+            //return CreatedAtAction("GetMovie", new { id = movie.Id }, movie);
+            return CreatedAtAction(nameof(GetMovie), new { id = movie.movieId }, movie);
         }
 
         // DELETE: api/Movies/5
