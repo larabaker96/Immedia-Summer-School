@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Summer_School_Movies.Models
 {
@@ -19,7 +20,7 @@ namespace Summer_School_Movies.Models
 
         public string ageRestriction { get; set; }
 
-
-        public List<Actor> topActors { get; set; }
+        [ForeignKey("actorId")]
+        public ICollection<Actor> topActors { get; set; }
     }
 }
