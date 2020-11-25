@@ -7,6 +7,9 @@ namespace Summer_School_Movies.Models
 {
     public class Movie
     {
+        //Auto-increment ID
+
+        [Key]
         public int movieId { get; set; }
 
         public string movieName { get; set; }

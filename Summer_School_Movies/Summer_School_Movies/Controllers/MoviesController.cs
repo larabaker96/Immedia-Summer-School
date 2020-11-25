@@ -53,7 +53,6 @@ namespace Summer_School_Movies.Controllers
             }
 
             _context.Entry(movie).State = EntityState.Modified;
-            _context.Update(movie);
 
             try
             {
