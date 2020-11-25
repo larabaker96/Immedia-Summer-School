@@ -52,6 +52,8 @@ namespace Summer_School_Movies.Controllers
                 return BadRequest();
             }
 
+            _context.Attach(movie.topActors);
+            _context.Entry(movie).Property(p => p.topActors).IsModified = true;
             _context.Entry(movie).State = EntityState.Modified;
 
             try
