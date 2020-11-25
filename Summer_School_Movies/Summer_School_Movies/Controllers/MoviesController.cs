@@ -47,14 +47,16 @@ namespace Summer_School_Movies.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMovie(int id, Movie movie)
         {
-            if (id != movie.movieId)
+            Movie mUpdate = _context.Movies.FirstOrDefault(t => t.movieId == id);
+            if (mUpdate != null)
             {
-                return BadRequest();
+                mUpdate.movieName = movie.movieName;
+                mUpdate.description = movie.description;
+                mUpdate.movieGenre = movie.movieGenre;
+                mUpdate.releaseDate = movie.releaseDate;
+                mUpdate.ageRestriction = movie.ageRestriction;
+                mUpdate.topActors = movie.topActors;
             }
-
-            _context.Attach(movie.topActors);
-            _context.Entry(movie).Property(p => p.topActors).IsModified = true;
-            _context.Entry(movie).State = EntityState.Modified;
 
             try
             {
