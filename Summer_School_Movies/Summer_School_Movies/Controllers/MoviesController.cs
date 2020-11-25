@@ -41,6 +41,24 @@ namespace Summer_School_Movies.Controllers
             return movie;
         }
 
+        // GET: api/Movies/query
+        [HttpGet]
+        [Route("Search")]
+        //https://localhost:5001/api/Movies?query=up
+        public async Task<ActionResult<IEnumerable<Movie>>> SearchMovies(string query)
+        {
+            string query1 = query;
+            string query2 = char.ToUpper(query[0]) + query.Substring(1);
+
+            List<Movie> movie = await _context.Movies.Include(m => m.topActors).Where(x => x.movieName.Contains(query1) || x.movieName.Contains(query2)).ToListAsync();
+
+            if(movie.Count == 0)
+            {
+                movie = await _context.Movies.Include(m => m.topActors).Where(c => c.topActors.Any(m => m.actorName.Contains(query1) || m.actorName.Contains(query2))).ToListAsync();
+            }
+            return movie;
+        }
+
         // PUT: api/Movies/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
