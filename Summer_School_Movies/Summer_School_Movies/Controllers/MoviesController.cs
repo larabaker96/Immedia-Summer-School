@@ -31,7 +31,7 @@ namespace Summer_School_Movies.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Movie>> GetMovieById(int id)
         {
-            var movie = await _context.Movies.Include(o => o.topActors).FirstOrDefaultAsync();
+            var movie = await _context.Movies.Include(o => o.topActors).FirstOrDefaultAsync(x => x.movieId == id);
 
             if (movie == null)
             {
