@@ -80,11 +80,11 @@ namespace Summer_School_Movies.Controllers
                     {
                         if (j < mUpdate.topActors.Count)
                         {
-                            mUpdate.topActors[j].actorName = movie.topActors[j].actorName;
+                            mUpdate.topActors.ElementAt(j).actorName = movie.topActors.ElementAt(j).actorName;
                         }
                         else
                         {
-                            mUpdate.topActors.Add(movie.topActors[j]);
+                            mUpdate.topActors.Add(movie.topActors.ElementAt(j));
                         }
                     }
                 }
@@ -92,7 +92,7 @@ namespace Summer_School_Movies.Controllers
                 {
                     for (int j = 0; j < mUpdate.topActors.Count; j++)
                     {
-                            mUpdate.topActors[j].actorName = movie.topActors[j].actorName;
+                            mUpdate.topActors.ElementAt(j).actorName = movie.topActors.ElementAt(j).actorName;
                     }
                 }
                               
