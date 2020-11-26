@@ -15,9 +15,11 @@ namespace Summer_School_Movies.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Actor>()
-            .HasOne(p => p.movie)
-            .WithMany(b => b.topActors);
+            //modelBuilder.Entity<Actor>()
+            //.HasOne(p => p.movie)
+            //.WithMany(b => b.topActors);
+
+
         }
     }
 }

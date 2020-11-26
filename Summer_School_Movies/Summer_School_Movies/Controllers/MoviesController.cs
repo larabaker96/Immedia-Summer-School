@@ -65,15 +65,37 @@ namespace Summer_School_Movies.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMovie(int id, Movie movie)
         {
-            Movie mUpdate = _context.Movies.FirstOrDefault(t => t.movieId == id);
+            Movie mUpdate = _context.Movies.Include(c=>c.topActors).FirstOrDefault(t => t.movieId == id);
             if (mUpdate != null)
-            {
+            { 
                 mUpdate.movieName = movie.movieName;
                 mUpdate.description = movie.description;
                 mUpdate.movieGenre = movie.movieGenre;
                 mUpdate.releaseDate = movie.releaseDate;
                 mUpdate.ageRestriction = movie.ageRestriction;
-                mUpdate.topActors = movie.topActors;
+
+                if(movie.topActors.Count > mUpdate.topActors.Count)
+                {
+                    for (int j = 0; j < movie.topActors.Count; j++)
+                    {
+                        if (j < mUpdate.topActors.Count)
+                        {
+                            mUpdate.topActors[j].actorName = movie.topActors[j].actorName;
+                        }
+                        else
+                        {
+                            mUpdate.topActors.Add(movie.topActors[j]);
+                        }
+                    }
+                }
+                else
+                {
+                    for (int j = 0; j < mUpdate.topActors.Count; j++)
+                    {
+                            mUpdate.topActors[j].actorName = movie.topActors[j].actorName;
+                    }
+                }
+                              
             }
 
             try

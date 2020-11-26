@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace Summer_School_Movies.Models
+namespace MoviesAPIConsumer.Models
 {
     public class Actor
     {
@@ -9,6 +9,6 @@ namespace Summer_School_Movies.Models
         public int actorId { get; set; }
         public string actorName { get; set; }
 
-        //public Movie movie { get; set; }
+        public Movie movie { get; set; }
     }
 }
