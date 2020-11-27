@@ -49,26 +49,56 @@
     </div>
 
     <div class="text-center panel-body">
-        <button type="button" class="btn btn-sm btn-primary" id="btnAdd" onclick="onClick()">Add Actor </button>
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#addActorModal">Add Actor</button>
         <button type="submit" class="btn btn-sm btn-primary">Save</button>
     </div>
 </form>
 
+
+<!-- Modal -->
+<div class="modal fade" id="addActorModal" tabindex="-1" role="dialog" aria-labelledby="addActorTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content" onsubmit="handleActorSubmit(event)">
+                <div class="modal-header">
+                        <h5 class="modal-title">Add Actor</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                    </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="form-group">
+                      <label for="">Name</label>
+                      <input type="text" name="name" id="actorName" class="form-control" placeholder="Actor Name">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Add Actor</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@* <script>
+    $('#exampleModal').on('show.bs.modal', event => {
+        var button = $(event.relatedTarget);
+        var modal = $(this);
+        // Use above variables to manipulate the DOM
+        
+    });
+</script> *@
+
 @*Battling to get this working*@
 @section scripts {
     <script type="text/javascript">
-        function onClick() {
-            alert('testing');
+        async function handleActorSubmit(event) {
+            event.preventDefault();
 
-            $.ajax({
-                async: true,
-                data: $('#form').serialize(),
-                type: 'POST',
-                url: '/Home/AddActorItem',
-                success: function (partialView) {
-                    $('actorItemsContainer').html(partialView);
-                }
-            });
+            var formData = new FormData(event.target);
+
+            console.log(formData.get('name'));
         }
     </script>
 }
