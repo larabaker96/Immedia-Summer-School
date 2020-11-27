@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <script src="/Scripts/jquery-3.1.1.min.js"></script>
+    @RenderSection("scripts", required: false)
 </head>
 <body>
     <div class="container-fluid">
         @RenderBody()
     </div>
+
 </body>
 </html>
-
-@RenderSection("scripts", required: false)

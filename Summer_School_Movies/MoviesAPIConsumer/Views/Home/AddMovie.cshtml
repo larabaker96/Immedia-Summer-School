@@ -7,6 +7,7 @@
         <label for="movieName">Name:</label>
         <input class="form-control" name="movieName" />
     </div>
+
     <div class="form-group">
         <label for="description">Description:</label>
         <input class="form-control" name="description" />
@@ -15,19 +16,31 @@
     @*add genre picker for easier interface*@
     <div class="form-group">
         <label for="movieGenre">Genre:</label>
-        <input class="form-control" name="movieGenre" />
+        <select class="form-control" id="movieGenre" name="movieGenre">
+            <option value="Action">Action</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Romance">Romance</option>
+            <option value="Thriller">Thriller</option>
+        </select>
     </div>
 
-    @*add date picker for better format*@
+    @*add date picker for better format - not functional in Firefox or Safari*@
     <div class="form-group">
         <label for="releaseDate">Release Date:</label>
-        <input class="form-control" name="releaseDate" />
+        <input type="date" class="form-control" id="releaseDate" name="releaseDate" placeholder="dd/mm/yyyy" />
     </div>
 
     @*add age picker for easier interface*@
     <div class="form-group">
         <label for="ageRestriction">Age Restriction:</label>
-        <input class="form-control" name="ageRestriction" />
+        <select class="form-control" id="ageRestriction" name="ageRestriction">
+            <option value="A">A</option>
+            <option value="PG">PG</option>
+            <option value="PG13">PG13</option>
+            <option value="16">16</option>
+            <option value="18">18</option>
+        </select>
     </div>
 
     @*insert fields for actor list*@
@@ -36,7 +49,7 @@
     </div>
 
     <div class="text-center panel-body">
-        <button type="button" class="btn btn-sm btn-primary" id="btnAdd">Add Actor </button>
+        <button type="button" class="btn btn-sm btn-primary" id="btnAdd" onclick="onClick()">Add Actor </button>
         <button type="submit" class="btn btn-sm btn-primary">Save</button>
     </div>
 </form>
@@ -44,7 +57,9 @@
 @*Battling to get this working*@
 @section scripts {
     <script type="text/javascript">
-        $("#btnAdd").on("click" , function () {
+        function onClick() {
+            alert('testing');
+
             $.ajax({
                 async: true,
                 data: $('#form').serialize(),
@@ -54,6 +69,6 @@
                     $('actorItemsContainer').html(partialView);
                 }
             });
-        });
+        }
     </script>
 }
