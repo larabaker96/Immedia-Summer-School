@@ -102,15 +102,31 @@
 
             var formData = new FormData(event.target);
 
-            movie.actors.push(formData.get('name'));
+            var name = formData.get('name');
+
+            if (!movie.actors.includes(name)) {
+                movie.actors.push(name);
+            }
+
+            updateMovieActors();
         }
 
         function updateMovieActors() {
-            var actorsElement = $('.whatever');
+            var actorItemsContainer = document.querySelector('#actorItemsContainer');
 
-            movie.actors.forEach((actor) => {
-                // HTML things here
+            movie.actors.forEach((name) => {
+                var newInput = createActorInput(name);
+                actorItemsContainer.appendChild(newInput);
             })
         }
+
+        function createActorInput(name) {
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.disabled = true;
+            input.value = name;
+            return input;
+        }
+
     </script>
 }
