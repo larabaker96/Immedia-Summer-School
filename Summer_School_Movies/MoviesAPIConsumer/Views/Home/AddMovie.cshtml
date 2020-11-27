@@ -43,14 +43,18 @@
         </select>
     </div>
 
-    @*insert fields for actor list*@
-    <div id="actorItemsContainer">
-        @Html.EditorFor(model => model.topActors)
+    <div class="form-group">
+        <label>Actors</label>
+        @*insert fields for actor list*@
+        <div class="form-control" id="actorItemsContainer">
+
+        </div>
+
     </div>
 
     <div class="text-center panel-body">
         <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addActorModal">Add Actor</button>
-        <button type="submit" class="btn btn-sm btn-primary">Save</button>
+        <button type="submit" class="btn btn-sm btn-primary" onclick="">Save</button>
     </div>
 </form>
 
@@ -93,9 +97,7 @@
 @*Battling to get this working*@
 @section scripts {
     <script type="text/javascript">
-        var movie = {
-            actors: []
-        }
+        var actors = [];
 
         async function handleActorSubmit(event) {
             event.preventDefault();
@@ -104,8 +106,8 @@
 
             var name = formData.get('name');
 
-            if (!movie.actors.includes(name)) {
-                movie.actors.push(name);
+            if (!actors.includes(name)) {
+                actors.push(name);
             }
 
             updateMovieActors();
@@ -113,6 +115,7 @@
 
         function updateMovieActors() {
             var actorItemsContainer = document.querySelector('#actorItemsContainer');
+            actorItemsContainer.innerHTML = "";
 
             movie.actors.forEach((name) => {
                 var newInput = createActorInput(name);

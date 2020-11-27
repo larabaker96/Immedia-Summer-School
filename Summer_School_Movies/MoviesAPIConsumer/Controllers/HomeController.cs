@@ -52,12 +52,38 @@ namespace MoviesAPIConsumer.Controllers
             
         }
 
+        public ViewResult SearchMovie() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> SearchMovie(string query)
+        {
+            Movie movie = new Movie();
+
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync("https://localhost:5001/api/Movies/Search?query=" + query))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+
+                    if(apiResponse == "[]")
+                    {
+                        ViewBag.Error = "No record found!";
+                        return View(null);
+                    }
+                    movie = JsonConvert.DeserializeObject<Movie>(apiResponse);
+                }
+            }
+
+            return View(movie);
+        }
+
         public ViewResult AddMovie() => View();
 
         [HttpPost]
-        public async Task<IActionResult> AddMovie(Movie movie)
+        public async Task<IActionResult> AddMovie(Movie movie, List<string> actors)
         {
             Movie receivedMovie = new Movie();
+
             using (var httpClient = new HttpClient())
             {
                 StringContent content = new StringContent(JsonConvert.SerializeObject(movie), Encoding.UTF8, "application/json");
@@ -83,14 +109,6 @@ namespace MoviesAPIConsumer.Controllers
             }
 
             return RedirectToAction("Index");
-        }
-
-        //Add actors functionality
-        [HttpPost]
-        public async Task<ActionResult> AddActorItem([Bind("topActors")] Movie movie)
-        {
-            movie.topActors.Add(new Actor());
-            return PartialView("MovieItems", movie);
         }
     }
 }

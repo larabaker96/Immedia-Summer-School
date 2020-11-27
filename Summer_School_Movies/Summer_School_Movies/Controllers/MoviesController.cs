@@ -44,7 +44,7 @@ namespace Summer_School_Movies.Controllers
         // GET: api/Movies/query
         [HttpGet]
         [Route("Search")]
-        //https://localhost:5001/api/Movies?query=up
+        //https://localhost:5001/api/Movies/Search?query=up
         public async Task<ActionResult<IEnumerable<Movie>>> SearchMovies(string query)
         {
             string query1 = query;
