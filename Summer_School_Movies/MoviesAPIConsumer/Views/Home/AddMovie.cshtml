@@ -93,12 +93,24 @@
 @*Battling to get this working*@
 @section scripts {
     <script type="text/javascript">
+        var movie = {
+            actors: []
+        }
+
         async function handleActorSubmit(event) {
             event.preventDefault();
 
             var formData = new FormData(event.target);
 
-            console.log(formData.get('name'));
+            movie.actors.push(formData.get('name'));
+        }
+
+        function updateMovieActors() {
+            var actorsElement = $('.whatever');
+
+            movie.actors.forEach((actor) => {
+                // HTML things here
+            })
         }
     </script>
 }
