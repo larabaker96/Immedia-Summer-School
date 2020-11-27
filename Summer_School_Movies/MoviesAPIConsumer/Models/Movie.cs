@@ -23,6 +23,6 @@ namespace MoviesAPIConsumer.Models
 
         public string ageRestriction { get; set; }
 
-        public List<Actor> topActors { get; set; }
+        public ICollection<Actor> topActors { get; set; }
     }
 }

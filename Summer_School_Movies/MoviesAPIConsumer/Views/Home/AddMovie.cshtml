@@ -1,0 +1,59 @@
+﻿@model Movie
+@{ Layout = "_Layout"; ViewBag.Title = "Add a Movie";}
+
+<h2>Add a Movie <a asp-action="Index" class="btn btn-sm btn-secondary">Back</a></h2>
+<form asp-action="AddMovie" method="post" id="form">
+    <div class="form-group">
+        <label for="movieName">Name:</label>
+        <input class="form-control" name="movieName" />
+    </div>
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <input class="form-control" name="description" />
+    </div>
+
+    @*add genre picker for easier interface*@
+    <div class="form-group">
+        <label for="movieGenre">Genre:</label>
+        <input class="form-control" name="movieGenre" />
+    </div>
+
+    @*add date picker for better format*@
+    <div class="form-group">
+        <label for="releaseDate">Release Date:</label>
+        <input class="form-control" name="releaseDate" />
+    </div>
+
+    @*add age picker for easier interface*@
+    <div class="form-group">
+        <label for="ageRestriction">Age Restriction:</label>
+        <input class="form-control" name="ageRestriction" />
+    </div>
+
+    @*insert fields for actor list*@
+    <div id="actorItemsContainer">
+        @Html.EditorFor(model => model.topActors)
+    </div>
+
+    <div class="text-center panel-body">
+        <button type="button" class="btn btn-sm btn-primary" id="btnAdd">Add Actor </button>
+        <button type="submit" class="btn btn-sm btn-primary">Save</button>
+    </div>
+</form>
+
+@*Battling to get this working*@
+@section scripts {
+    <script type="text/javascript">
+        $("#btnAdd").on("click" , function () {
+            $.ajax({
+                async: true,
+                data: $('#form').serialize(),
+                type: 'POST',
+                url: '/Home/AddActorItem',
+                success: function (partialView) {
+                    $('actorItemsContainer').html(partialView);
+                }
+            });
+        });
+    </script>
+}

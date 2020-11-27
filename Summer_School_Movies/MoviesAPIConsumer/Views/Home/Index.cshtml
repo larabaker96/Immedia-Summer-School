@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Movie>
+@{ Layout = "_Layout"; ViewBag.Title = "All Movies";}
+
+<h2>All Movies</h2>
+<a asp-action="AddMovie" class="btn btn-sm btn-primary">Add Movie</a>
+<a asp-action="GetMovie" class="btn btn-sm btn-secondary">Get Movie</a>
+
+<table class="table table-sm table-striped table-bordered m-2">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Genre</th>
+            <th>Release</th>
+            <th>Age</th>
+            <th>Top Actors</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var r in Model)
+        {
+        <tr>
+            <td>@r.movieId</td>
+            <td>@r.movieName</td>
+            <td>@r.description</td>
+            <td>@r.movieGenre</td>
+            <td>@r.releaseDate</td>
+            <td>@r.ageRestriction</td>
+            <td>
+                <ul>
+                    @foreach(var actor in r.topActors)
+                    {
+                        <li>@actor.actorName</li>
+                    }
+
+                </ul>
+            </td>
+            <td>
+                <a asp-action="EditMovie" asp-route-id="@r.movieId">
+                    <img src="/icon/edit.png" />
+                </a>
+            </td>
+            <td>
+                <form asp-action="DeleteMovie" method="post">
+                    <input type="hidden" value="@r.movieId" name="MovieId" />
+                    <input type="image" src="/icon/close.png" />
+                </form>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
