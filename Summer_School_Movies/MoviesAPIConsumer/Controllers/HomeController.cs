@@ -30,6 +30,7 @@ namespace MoviesAPIConsumer.Controllers
         public async Task<IActionResult> GetMovie(int id)
         {
             Movie movie = new Movie();
+ 
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync("https://localhost:5001/api/Movies/" + id))
@@ -38,7 +39,17 @@ namespace MoviesAPIConsumer.Controllers
                     movie = JsonConvert.DeserializeObject<Movie>(apiResponse);
                 }
             }
-            return View(movie);
+
+            if(movie.movieId == id)
+            {
+                return View(movie);
+            }
+            else
+            {
+                ViewBag.Error = "No record found!";
+                return View(null);
+            }
+            
         }
 
         public ViewResult AddMovie() => View();
@@ -58,6 +69,20 @@ namespace MoviesAPIConsumer.Controllers
                 }
             }
             return View(receivedMovie);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteMovie(int MovieId)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.DeleteAsync("https://localhost:5001/api/Movies/" + MovieId))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                }
+            }
+
+            return RedirectToAction("Index");
         }
 
         //Add actors functionality

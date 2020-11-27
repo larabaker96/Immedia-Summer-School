@@ -12,9 +12,10 @@
     </div>
 </form>
 
+<p style="color:red">@ViewBag.Error </p>
+
 @if (Model != null)
 {
-    <h2>Movie</h2>
     <table class="table table-sm table-striped table-bordered m-2">
         <thead>
             <tr>
@@ -36,13 +37,17 @@
                 <td>@Model.releaseDate</td>
                 <td>@Model.ageRestriction</td>
                 <td>
-                    <ul>
-                        @foreach (var actor in Model.topActors)
+                    @{ if (Model.topActors != null)
                         {
-                            <li>@actor.actorName</li>
-                        }
+                            <ul>
+                                @foreach (var actor in Model.topActors)
+                                {
+                                    <li>@actor.actorName</li>
+                                }
 
-                    </ul>
+                            </ul>
+                        }
+                    }
                 </td>
             </tr>
         </tbody>
