@@ -57,24 +57,17 @@ namespace MoviesAPIConsumer.Controllers
         [HttpPost]
         public async Task<IActionResult> SearchMovie(string query)
         {
-            Movie movie = new Movie();
-
+            List<Movie> searchResult = new List<Movie>();
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync("https://localhost:5001/api/Movies/Search?query=" + query))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-
-                    if(apiResponse == "[]")
-                    {
-                        ViewBag.Error = "No record found!";
-                        return View(null);
-                    }
-                    movie = JsonConvert.DeserializeObject<Movie>(apiResponse);
+                    searchResult = JsonConvert.DeserializeObject<List<Movie>>(apiResponse);
                 }
             }
 
-            return View(movie);
+            return View(searchResult);
         }
 
         public ViewResult AddMovie() => View();
