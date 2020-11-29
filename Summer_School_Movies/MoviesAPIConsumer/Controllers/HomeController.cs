@@ -67,7 +67,16 @@ namespace MoviesAPIConsumer.Controllers
                 }
             }
 
-            return View(searchResult);
+            if (searchResult.Count == 0)
+            {
+                ViewBag.Error = "No record found!";
+                return View(null);
+            }
+            else
+            {
+                return View(searchResult);
+
+            }
         }
 
         public ViewResult AddMovie() => View();
