@@ -14,7 +14,6 @@
     <Folder Include="Views\Shared\" />
     <Folder Include="Controllers\" />
     <Folder Include="Views\Home\" />
-    <Folder Include="Views\Shared\EditorTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\lib\twitter-bootstrap\css\bootstrap.css" />
