@@ -34,4 +34,4 @@ This API currently runs on a localhost server. The API url currently is: https:/
 
 ## Contributions
 
-A big thank you to Oliver Dipple who helped me during my week at Summer School who gave me great suggestions and who helped me when I was stuck.
+A big thank you to Oliver Dipple who helped me during my week at Summer School. He gave me great suggestions and helped me whenever I was really stuck.
